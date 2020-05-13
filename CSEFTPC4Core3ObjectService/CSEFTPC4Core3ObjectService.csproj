@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Library</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <ApplicationIcon />
+    <StartupObject />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="CSAc4yFW">
+      <HintPath>C:\library\LPCsharp\CSAc4yFW.dll</HintPath>
+    </Reference>
+    <Reference Include="CSAc4yServiceFW">
+      <HintPath>C:\library\LPCsharp\CSAc4yServiceFW.dll</HintPath>
+    </Reference>
+    <Reference Include="CSEFTPC4Core3Cap">
+      <HintPath>C:\library\LPCsharp\CSEFTPC4Core3Cap.dll</HintPath>
+    </Reference>
+    <Reference Include="CSEFTPC4Core3Objects">
+      <HintPath>C:\library\LPCsharp\CSEFTPC4Core3Objects.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
