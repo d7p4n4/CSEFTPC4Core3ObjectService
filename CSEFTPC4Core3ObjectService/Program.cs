@@ -16,11 +16,7 @@ namespace CSEFTPC4Core3ObjectService
                         Ac4yPersistentChild = new Ac4yPersistentChild()
                         {
                             name = "Stewie",
-                            ages = 2,
-                            ac4yIdentification = new Ac4yIdentification()
-                            {
-                                createdAt = "holnap"
-                            }
+                            ages = 2
                         }
                     });
             }catch(Exception exception)

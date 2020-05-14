@@ -3,12 +3,36 @@ using CSEFTPC4Core3Cap.CAPs;
 using CSEFTPC4Core3Objects.Ac4yObjects;
 using Modul.Final.Class;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 namespace CSEFTPC4Core3ObjectService.ObjectServices
 {
  
     public class Ac4yPersistentChildEFService
     {
+        public GetListResponse GetList(GetListRequest request)
+        {
+
+            GetListResponse response = new GetListResponse();
+
+            try
+            {
+
+                response.Ac4yPersistentChilds = new Ac4yPersistentChildEFCap().GetAc4yPersistentChilds();
+
+                response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS };
+
+            }
+            catch (Exception exception)
+            {
+                response.Result = (new Ac4yProcessResult() { Code = Ac4yProcessResult.FAIL, Message = exception.Message, Description = exception.StackTrace });
+            }
+
+            return response;
+
+        } // GetList
+
         public GetByIdResponse GetById(GetByIdRequest request)
         {
 
@@ -105,11 +129,16 @@ namespace CSEFTPC4Core3ObjectService.ObjectServices
 
             try
             {
+                if (new Ac4yPersistentChildEFCap().IsExistById(request.Id))
+                {
+                    new Ac4yPersistentChildEFCap().UpdateById(request.Id, request.Ac4yPersistentChild);
 
-                new Ac4yPersistentChildEFCap().UpdateById(request.Id, request.Ac4yPersistentChild);
-
-                response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS };
-
+                    response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS };
+                }
+                else
+                {
+                    response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.FAIL, Message = "Adott id-val  nem létezik rekord." };
+                }
             }
             catch (Exception exception)
             {
@@ -213,6 +242,44 @@ namespace CSEFTPC4Core3ObjectService.ObjectServices
             return response;
 
         } // SetByGuid
+
+        public DeleteByIdResponse DeleteById(DeleteByIdRequest request)
+        {
+
+            DeleteByIdResponse response = new DeleteByIdResponse();
+
+            try
+            {
+                if (new Ac4yPersistentChildEFCap().IsExistById(request.Id)) { 
+
+                    new Ac4yPersistentChildEFCap().DeleteAc4yPersistentChildById(request.Id);
+
+                    response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS };
+                }
+                else
+                {
+                    response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.FAIL, Message = "Adott id-val  nem létezik rekord." };
+                }
+            }
+            catch (Exception exception)
+            {
+                response.Result = (new Ac4yProcessResult() { Code = Ac4yProcessResult.FAIL, Message = exception.Message, Description = exception.StackTrace });
+            }
+
+            return response;
+
+        }
+
+        public class GetListResponse : Ac4yServiceResponse
+        {
+            public IEnumerable<Ac4yPersistentChild> Ac4yPersistentChilds { get; set; }
+        }
+
+        public class GetListRequest : Ac4yServiceRequest
+        {
+
+        }
+
         public class GetByIdRequest : Ac4yServiceRequest
         {
             public int Id { get; set; }
@@ -277,6 +344,17 @@ namespace CSEFTPC4Core3ObjectService.ObjectServices
         }
 
         public class SetByGuidResponse : Ac4yServiceResponse {}
+
+
+        public class DeleteByIdResponse : Ac4yServiceResponse
+        {
+
+        }
+
+        public class DeleteByIdRequest : Ac4yServiceRequest
+        {
+            public int Id { get; set; }
+        }
 
     } // Ac4yPersistentChildEFService
 
