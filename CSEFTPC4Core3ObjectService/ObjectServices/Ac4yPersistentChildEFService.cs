@@ -19,7 +19,7 @@ namespace CSEFTPC4Core3ObjectService.ObjectServices
             try
             {
 
-                response.Ac4yPersistentChilds = new Ac4yPersistentChildEFCap().GetAc4yPersistentChilds();
+                response.Ac4yPersistentChilds = new Ac4yPersistentChildEFCap().GetList();
 
                 response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS };
 
@@ -131,6 +131,8 @@ namespace CSEFTPC4Core3ObjectService.ObjectServices
             {
                 if (new Ac4yPersistentChildEFCap().IsExistById(request.Id))
                 {
+                    request.Ac4yPersistentChild.Id = request.Id;
+
                     new Ac4yPersistentChildEFCap().UpdateById(request.Id, request.Ac4yPersistentChild);
 
                     response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS };
@@ -252,7 +254,7 @@ namespace CSEFTPC4Core3ObjectService.ObjectServices
             {
                 if (new Ac4yPersistentChildEFCap().IsExistById(request.Id)) { 
 
-                    new Ac4yPersistentChildEFCap().DeleteAc4yPersistentChildById(request.Id);
+                    new Ac4yPersistentChildEFCap().DeleteById(request.Id);
 
                     response.Result = new Ac4yProcessResult() { Code = Ac4yProcessResult.SUCCESS };
                 }
