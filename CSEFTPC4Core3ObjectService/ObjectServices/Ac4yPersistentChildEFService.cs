@@ -131,6 +131,22 @@ namespace CSEFTPC4Core3ObjectService.ObjectServices
             {
                 if (new Ac4yPersistentChildEFCap().IsExistById(request.Id))
                 {
+                    if (request.Ac4yPersistentChild.updatedAt == null)
+                        request.Ac4yPersistentChild.updatedAt = DateTime.Now;
+
+                    if (request.Ac4yPersistentChild.createdAt == null)
+                        request.Ac4yPersistentChild.createdAt = DateTime.Now;
+
+                    if (request.Ac4yPersistentChild.Ac4yIdentification == null)
+                    {
+                        if (request.Ac4yPersistentChild.Ac4yIdentification.createdAt == null)
+                            request.Ac4yPersistentChild.Ac4yIdentification.createdAt = DateTime.Now;
+
+                        if (request.Ac4yPersistentChild.Ac4yIdentification.updatedAt == null)
+                            request.Ac4yPersistentChild.Ac4yIdentification.updatedAt = DateTime.Now;
+
+                    }
+
                     request.Ac4yPersistentChild.Id = request.Id;
 
                     new Ac4yPersistentChildEFCap().UpdateById(request.Id, request.Ac4yPersistentChild);
@@ -180,6 +196,21 @@ namespace CSEFTPC4Core3ObjectService.ObjectServices
 
             try
             {
+                if (request.Ac4yPersistentChild.updatedAt == null)
+                    request.Ac4yPersistentChild.updatedAt = DateTime.Now;
+
+                if (request.Ac4yPersistentChild.createdAt == null)
+                    request.Ac4yPersistentChild.createdAt = DateTime.Now;
+
+                if (request.Ac4yPersistentChild.Ac4yIdentification == null)
+                {
+                    if (request.Ac4yPersistentChild.Ac4yIdentification.createdAt == null)
+                        request.Ac4yPersistentChild.Ac4yIdentification.createdAt = DateTime.Now;
+
+                    if (request.Ac4yPersistentChild.Ac4yIdentification.updatedAt == null)
+                        request.Ac4yPersistentChild.Ac4yIdentification.updatedAt = DateTime.Now;
+
+                }
 
                 new Ac4yPersistentChildEFCap().Insert(request.Ac4yPersistentChild);
 
